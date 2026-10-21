@@ -1,0 +1,1058 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>دعوة صغيرة 💗</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:linear-gradient(135deg,#fff5f8,#fce4ec);
+  color:#3b2630;
+  min-height:100vh;
+}
+
+.app{
+  width:min(92%,560px);
+  margin:auto;
+  padding:28px 0 40px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #f4cbd8;
+  border-radius:28px;
+  padding:28px;
+  box-shadow:0 18px 50px #b76b7b22;
+  text-align:center;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+h1{
+  margin:4px 0 10px;
+  font-size:30px;
+}
+
+.sub{
+  color:#765d66;
+  line-height:1.8;
+}
+
+.heart{
+  font-size:54px;
+  animation:float 2.4s ease-in-out infinite;
+}
+
+@keyframes float{
+  50%{transform:translateY(-7px)}
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:24px;
+  min-height:58px;
+  position:relative;
+}
+
+button{
+  border:0;
+  border-radius:15px;
+  padding:13px 22px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.yes{
+  background:#ec5f88;
+  color:white;
+  animation:pulse 1.25s infinite;
+}
+
+.yes:hover{
+  transform:scale(1.04);
+}
+
+@keyframes pulse{
+  50%{
+    box-shadow:0 0 0 9px #ec5f881c;
+  }
+}
+
+.no{
+  background:#f1e9ec;
+  color:#684e58;
+  position:relative;
+}
+
+.hint{
+  min-height:28px;
+  margin-top:12px;
+  color:#d04e75;
+  font-size:14px;
+  font-weight:700;
+}
+
+.section-title{
+  font-size:24px;
+  margin:0 0 8px;
+}
+
+.back{
+  background:#f6eef1;
+  color:#694f59;
+  margin-top:16px;
+}
+
+.cal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:18px;
+}
+
+.cal-title{
+  font-size:18px;
+  font-weight:700;
+  color:#693c4b;
+}
+
+.nav{
+  width:40px;
+  height:40px;
+  padding:0;
+  font-size:24px;
+  line-height:1;
+  background:#fff0f4;
+  color:#ec5f88;
+}
+
+.nav:disabled{
+  opacity:.3;
+  cursor:not-allowed;
+}
+
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+  margin-top:12px;
+}
+
+.dow{
+  font-size:11px;
+  color:#9b7c86;
+  padding:5px 0;
+}
+
+.day{
+  font-family:inherit;
+  font-size:15px;
+  font-weight:700;
+  padding:0;
+  aspect-ratio:1/1;
+  border-radius:10px;
+  background:#fff0f4;
+  color:#693c4b;
+  cursor:pointer;
+}
+
+.day:hover:not(:disabled){
+  background:#fbd5e0;
+}
+
+.day:disabled{
+  background:#f8f1f3;
+  color:#c7b6bc;
+  cursor:not-allowed;
+}
+
+.day.today{
+  outline:2px solid #ec5f88;
+  outline-offset:-2px;
+}
+
+.day.selected{
+  background:#ec5f88;
+  color:#fff;
+}
+
+.times{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  margin-top:16px;
+}
+
+.time{
+  background:#f8eef1;
+  color:#654b55;
+  font-family:inherit;
+}
+
+.time:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+}
+
+.time.selected{
+  background:#ec5f88;
+  color:#fff;
+}
+
+.foods{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:11px;
+  margin-top:20px;
+}
+
+.food{
+  background:#fff7f9;
+  border:1px solid #f1ccd8;
+  min-height:72px;
+}
+
+.food.selected{
+  background:#ec5f88;
+  color:#fff;
+  border-color:#ec5f88;
+}
+
+.emoji{
+  font-size:24px;
+  display:block;
+  margin-bottom:4px;
+}
+
+.confirm{
+  width:100%;
+  margin-top:22px;
+  background:#ec5f88;
+  color:#fff;
+}
+
+.confirm:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+.summary{
+  background:#fff7f9;
+  border:1px solid #f2ccd8;
+  border-radius:20px;
+  padding:18px;
+  text-align:right;
+  line-height:2;
+  margin-top:20px;
+}
+
+.big{
+  font-size:34px;
+  margin:8px;
+}
+
+.small{
+  font-size:12px;
+  color:#9b7b85;
+  margin-top:14px;
+}
+
+@media(max-width:400px){
+  .card{
+    padding:21px;
+  }
+
+  .times{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<main class="app">
+
+<!-- الصفحة الأولى -->
+<section class="card page active" id="p1">
+
+  <div class="heart">💗</div>
+
+  <h1>عندي Meeting صغير ليكي</h1>
+
+  <div class="sub">
+    الموضوع بسيط جدًا... خروجة لطيفة،
+    وأنتِ اللي تختاري اليوم والساعة والأكل 😌
+  </div>
+
+  <div class="buttons" id="choiceArea">
+
+    <button class="yes" id="yesBtn">
+      موافقة 💕
+    </button>
+
+    <button class="no" id="noBtn">
+      لأ 🙈
+    </button>
+
+  </div>
+
+  <div class="hint" id="hint"></div>
+
+  <div class="small">
+    ملاحظة: الـ«لأ» داخلة في لعبة مطاردة صغيرة 😂
+  </div>
+
+</section>
+
+
+<!-- اختيار التاريخ والساعة -->
+<section class="card page" id="p2">
+
+  <h2 class="section-title">
+    حلو... نحدد المعاد؟ 📅
+  </h2>
+
+  <div class="sub">
+    اختاري يوم من الأيام الجاية فقط، وبعدها الساعة.
+  </div>
+
+  <div class="cal-head">
+    <button type="button" class="nav" id="prevMonth" aria-label="الشهر السابق">›</button>
+    <div class="cal-title" id="calTitle"></div>
+    <button type="button" class="nav" id="nextMonth" aria-label="الشهر التالي">‹</button>
+  </div>
+
+  <div class="calendar" id="calendar"></div>
+
+  <div class="times" id="times"></div>
+
+  <button class="confirm" id="dateOk" disabled>
+    OK — تمام 💗
+  </button>
+
+  <button class="back" data-back="p1">
+    رجوع
+  </button>
+
+</section>
+
+
+<!-- اختيار الأكل -->
+<section class="card page" id="p3">
+
+  <h2 class="section-title">
+    والأكل على ذوقك 🍽️
+  </h2>
+
+  <div class="sub">
+    اختاري حاجة واحدة.
+  </div>
+
+  <div class="foods" id="foods"></div>
+
+  <button class="confirm" id="foodOk" disabled>
+    OK — خلصنا 💗
+  </button>
+
+  <button class="back" data-back="p2">
+    رجوع
+  </button>
+
+</section>
+
+
+<!-- المراجعة -->
+<section class="card page" id="p4">
+
+  <div class="big">🥰</div>
+
+  <h2 class="section-title">
+    اتفقنا!
+  </h2>
+
+  <div class="sub">
+    دي الخلاصة قبل التثبيت:
+  </div>
+
+  <div class="summary" id="summary"></div>
+
+  <button class="confirm" id="finalBtn">
+    تثبيت المعاد 💌
+  </button>
+
+  <button class="back" data-back="p3">
+    تعديل
+  </button>
+
+</section>
+
+
+<!-- النتيجة النهائية -->
+<section class="card page" id="p5">
+
+  <div class="big">💞</div>
+
+  <h2 class="section-title">
+    It's a date!
+  </h2>
+
+  <div class="sub">
+    تم اختيار المعاد والأكل بنجاح.
+  </div>
+
+  <div class="summary" id="finalSummary"></div>
+
+  <button class="confirm" id="saveBtn">
+    حفظ الكارت كصورة 📸
+  </button>
+
+  <div class="small">
+    الصورة تُنشأ مباشرة من الصفحة بدون إرسال بيانات لأي سيرفر.
+  </div>
+
+</section>
+
+</main>
+
+
+<script>
+
+(() => {
+
+  const state = {
+    date:null,
+    time:null,
+    food:null
+  };
+
+
+  /* =========================
+     تغيير الصفحات
+  ========================= */
+
+  const pages = [...document.querySelectorAll('.page')];
+
+  const show = id => {
+
+    pages.forEach(page => {
+
+      page.classList.toggle(
+        'active',
+        page.id === id
+      );
+
+    });
+
+  };
+
+
+  /* =========================
+     زر لأ
+  ========================= */
+
+  const yes = document.getElementById('yesBtn');
+
+  const no = document.getElementById('noBtn');
+
+  const area = document.getElementById('choiceArea');
+
+  const hint = document.getElementById('hint');
+
+
+  const funny = [
+
+    "حاولي تاني 😌",
+
+    "طب ما لفيتيش... جربي مرة كمان 😂",
+
+    "بحب الإصرار ده، بس جربي حظك تاني 💗",
+
+    "قريبة جدًا... أو مش قريبة خالص 😂",
+
+    "محاولة محترمة... بس لأ 😏",
+
+    "واضح إننا هنلف كتير النهارده 🙈",
+
+    "آخر محاولة؟ لا طبعًا، واحدة كمان 😂",
+
+    "أهو الـ«لأ» نفسها بتقولك حاولي تاني 💕"
+
+  ];
+
+
+  let noCount = 0;
+
+
+  no.addEventListener('click', () => {
+
+    noCount++;
+
+    hint.textContent =
+      funny[(noCount - 1) % funny.length];
+
+
+    const r = area.getBoundingClientRect();
+
+
+    const x =
+      Math.max(
+        -90,
+        Math.random() * Math.min(170, r.width - 20) - 80
+      );
+
+
+    const y =
+      Math.random() * 55 - 25;
+
+
+    no.style.transform =
+      `translate(${x}px,${y}px)`;
+
+  });
+
+
+  yes.addEventListener('click', () => {
+
+    show('p2');
+
+  });
+
+
+
+  /* =========================
+     Calendar
+  ========================= */
+
+  const cal = document.getElementById('calendar');
+  const calTitle = document.getElementById('calTitle');
+  const prevBtn = document.getElementById('prevMonth');
+  const nextBtn = document.getElementById('nextMonth');
+  const times = document.getElementById('times');
+
+  const days = ["أحد","اثنين","ثلاثاء","أربعاء","خميس","جمعة","سبت"];
+
+  const months = [
+    "يناير","فبراير","مارس","أبريل","مايو","يونيو",
+    "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"
+  ];
+
+  const WEEK_START = 6;      // الأسبوع يبدأ من السبت
+  const MONTHS_AHEAD = 2;    // الشهر الحالي + شهرين
+
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  const minMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const maxMonth = new Date(today.getFullYear(), today.getMonth() + MONTHS_AHEAD, 1);
+
+  let view = new Date(minMonth);
+
+  const sameDay = (a, b) => a && b && a.getTime() === b.getTime();
+
+
+  function renderCalendar(){
+
+    cal.innerHTML = '';
+
+    calTitle.textContent =
+      `${months[view.getMonth()]} ${view.getFullYear()}`;
+
+    prevBtn.disabled = view <= minMonth;
+    nextBtn.disabled = view >= maxMonth;
+
+    // أسماء الأيام
+    for(let i = 0; i < 7; i++){
+      const el = document.createElement('div');
+      el.className = 'dow';
+      el.textContent = days[(WEEK_START + i) % 7];
+      cal.appendChild(el);
+    }
+
+    // خانات فاضية قبل أول يوم في الشهر
+    const y = view.getFullYear();
+    const m = view.getMonth();
+    const offset = (new Date(y, m, 1).getDay() - WEEK_START + 7) % 7;
+
+    for(let i = 0; i < offset; i++){
+      cal.appendChild(document.createElement('div'));
+    }
+
+    // الأيام
+    const total = new Date(y, m + 1, 0).getDate();
+
+    for(let n = 1; n <= total; n++){
+
+      const d = new Date(y, m, n);
+
+      const el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'day';
+      el.textContent = n;
+
+      if(d < today){
+        el.disabled = true;
+      }
+
+      if(sameDay(d, today)) el.classList.add('today');
+      if(sameDay(d, state.date)) el.classList.add('selected');
+
+      el.addEventListener('click', () => {
+        state.date = d;
+        renderCalendar();
+        updateTimes();
+        updateDateOk();
+      });
+
+      cal.appendChild(el);
+    }
+  }
+
+
+  prevBtn.addEventListener('click', () => {
+    view = new Date(view.getFullYear(), view.getMonth() - 1, 1);
+    renderCalendar();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    view = new Date(view.getFullYear(), view.getMonth() + 1, 1);
+    renderCalendar();
+  });
+
+
+
+  /* =========================
+     اختيار الساعة
+  ========================= */
+
+  const slots = [
+    ["6:00 م", 18],
+    ["7:00 م", 19],
+    ["8:00 م", 20],
+    ["9:00 م", 21]
+  ];
+
+  const timeButtons = [];
+
+  slots.forEach(([label, hour]) => {
+
+    const el = document.createElement('button');
+    el.type = 'button';
+    el.className = 'time';
+    el.textContent = label;
+
+    el.addEventListener('click', () => {
+      state.time = label;
+      updateTimes();
+      updateDateOk();
+    });
+
+    times.appendChild(el);
+    timeButtons.push({ el, label, hour });
+  });
+
+
+  // لو اليوم المختار هو النهارده، الساعات اللي عدّت تتقفل
+  function updateTimes(){
+
+    const now = new Date();
+    const isToday = sameDay(state.date, today);
+
+    timeButtons.forEach(t => {
+
+      t.el.disabled = isToday && t.hour <= now.getHours();
+
+      if(t.el.disabled && state.time === t.label){
+        state.time = null;
+      }
+
+      t.el.classList.toggle('selected', state.time === t.label);
+    });
+  }
+
+
+  function updateDateOk(){
+
+    document.getElementById('dateOk').disabled =
+      !(state.date && state.time);
+
+  }
+
+  renderCalendar();
+  updateTimes();
+
+
+
+  document
+    .getElementById('dateOk')
+    .addEventListener('click', () => {
+
+      show('p3');
+
+    });
+
+
+
+  /* =========================
+     الأكل
+  ========================= */
+
+  const foodData = [
+
+    ["🍣","Sushi"],
+
+    ["🥩","مشاوي"],
+
+    ["🥞","كريب"],
+
+    ["🍕","بيتزا"],
+
+    ["🍝","باستا"],
+
+    ["🎁","إنتِ اختاري"]
+
+  ];
+
+
+  const foods =
+    document.getElementById('foods');
+
+
+  foodData.forEach(([emoji,name]) => {
+
+    const el =
+      document.createElement('button');
+
+
+    el.type = 'button';
+
+    el.className = 'food';
+
+
+    el.innerHTML =
+      `<span class="emoji">${emoji}</span>
+       ${name}`;
+
+
+    el.addEventListener('click', () => {
+
+      document
+        .querySelectorAll('.food')
+        .forEach(x =>
+          x.classList.remove('selected')
+        );
+
+
+      el.classList.add('selected');
+
+      state.food = name;
+
+      document.getElementById('foodOk')
+        .disabled = false;
+
+    });
+
+
+    foods.appendChild(el);
+
+  });
+
+
+
+  /* =========================
+     الانتقال للمراجعة
+  ========================= */
+
+  document
+    .getElementById('foodOk')
+    .addEventListener('click', () => {
+
+
+      const dateText =
+        `${days[state.date.getDay()]}، ` +
+        `${state.date.getDate()} ` +
+        `${months[state.date.getMonth()]} ` +
+        `${state.date.getFullYear()}`;
+
+
+      document.getElementById('summary')
+        .innerHTML =
+
+        `📅 <b>${dateText}</b>
+         <br>
+         ⏰ <b>${state.time}</b>
+         <br>
+         🍽️ <b>${state.food}</b>`;
+
+
+      show('p4');
+
+    });
+
+
+
+  /* =========================
+     أزرار الرجوع
+  ========================= */
+
+  document
+    .querySelectorAll('.back')
+    .forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        show(button.dataset.back);
+
+      });
+
+    });
+
+
+
+  /* =========================
+     التثبيت
+  ========================= */
+
+  document
+    .getElementById('finalBtn')
+    .addEventListener('click', () => {
+
+      document.getElementById('finalSummary')
+        .innerHTML =
+        document.getElementById('summary')
+          .innerHTML;
+
+
+      show('p5');
+
+    });
+
+
+
+  /* =========================
+     إنشاء Screenshot / PNG
+  ========================= */
+
+  document
+    .getElementById('saveBtn')
+    .addEventListener('click', () => {
+
+
+      const canvas =
+        document.createElement('canvas');
+
+
+      const ctx =
+        canvas.getContext('2d');
+
+
+      canvas.width = 900;
+
+      canvas.height = 1100;
+
+
+      /* Background */
+
+      ctx.fillStyle = "#fff5f8";
+
+      ctx.fillRect(
+        0,
+        0,
+        900,
+        1100
+      );
+
+
+      /* Card */
+
+      ctx.fillStyle = "#ffffff";
+
+      roundRect(
+        ctx,
+        70,
+        70,
+        760,
+        960,
+        35
+      );
+
+      ctx.fill();
+
+
+      /* Title */
+
+      ctx.fillStyle = "#3b2630";
+
+      ctx.textAlign = "center";
+
+      ctx.font =
+        "bold 54px Arial";
+
+      ctx.fillText(
+        "It's a date! 💗",
+        450,
+        180
+      );
+
+
+      ctx.font =
+        "34px Arial";
+
+      ctx.fillText(
+        "تم الاتفاق على:",
+        450,
+        260
+      );
+
+
+      /* Date */
+
+      const dateText =
+        `${days[state.date.getDay()]}، ` +
+        `${state.date.getDate()} ` +
+        `${months[state.date.getMonth()]} ` +
+        `${state.date.getFullYear()}`;
+
+
+      ctx.font =
+        "bold 38px Arial";
+
+
+      ctx.fillText(
+        dateText,
+        450,
+        350
+      );
+
+
+      ctx.fillText(
+        state.time,
+        450,
+        430
+      );
+
+
+      ctx.fillText(
+        state.food,
+        450,
+        510
+      );
+
+
+      ctx.font =
+        "28px Arial";
+
+      ctx.fillStyle =
+        "#ec5f88";
+
+
+      ctx.fillText(
+        "💕",
+        450,
+        650
+      );
+
+
+      ctx.fillStyle =
+        "#765d66";
+
+
+      ctx.font =
+        "25px Arial";
+
+
+      ctx.fillText(
+        "See you soon ✨",
+        450,
+        730
+      );
+
+
+      /* Download */
+
+      const a =
+        document.createElement('a');
+
+
+      a.download =
+        'our-date.png';
+
+
+      a.href =
+        canvas.toDataURL('image/png');
+
+
+      a.click();
+
+    });
+
+
+
+  /* رسم المستطيل */
+
+  function roundRect(
+    ctx,
+    x,
+    y,
+    w,
+    h,
+    r
+  ){
+
+    ctx.beginPath();
+
+    ctx.moveTo(x+r,y);
+
+    ctx.arcTo(
+      x+w,
+      y,
+      x+w,
+      y+h,
+      r
+    );
+
+    ctx.arcTo(
+      x+w,
+      y+h,
+      x,
+      y+h,
+      r
+    );
+
+    ctx.arcTo(
+      x,
+      y+h,
+      x,
+      y,
+      r
+    );
+
+    ctx.arcTo(
+      x,
+      y,
+      x+w,
+      y,
+      r
+    );
+
+    ctx.closePath();
+
+  }
+
+})();
+
+</script>
+
+</body>
+</html>
